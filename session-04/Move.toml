@@ -1,0 +1,16 @@
+[package]
+name = "session_04"
+version = "1.0.0"
+authors = []
+
+[addresses]
+admin_settings_addr='a22741a13cb34897a722f708510825faa156456c6fcfd6c46f4a96f4d10b1d78'
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
