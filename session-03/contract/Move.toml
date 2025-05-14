@@ -1,0 +1,15 @@
+[package]
+name = "sesion_3"
+version = "1.0.0"
+authors = []
+
+[addresses]
+data_struct_addr = "2fca91d649829f29f2cc8171872283a5211d8f322d1997cc4a8d028f8db1fe0c"
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
