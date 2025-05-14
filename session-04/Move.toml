@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = []
 
 [addresses]
-admin_settings_addr='a22741a13cb34897a722f708510825faa156456c6fcfd6c46f4a96f4d10b1d78'
+resource_creator_addr='82a21c4bfbb73588859269b3df30c468c5627c3d7b4588b87915e03c966aa699'
 
 [dev-addresses]
 

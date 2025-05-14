@@ -1,65 +1,52 @@
 # 📘 Move Language Module: Admin Settings
 
-Welcome to this module on **Admin Settings in Move**!  
-In this lesson, we explore how to use **resources**, **vectors**, **strings**, and **signer-based access control** to manage settings in a secure and structured way.
+Welcome to this module on **Resource-Based Accounts in Move**!  
+In this lesson, we explore how to use **resources**, **signers**, **conditionals**, and **string manipulation** to create and manage user profile data securely.
 
 ---
 
 ## ✅ Learning Objectives
 
-- Understand how to define structs with `store`, `key`, `drop` abilities
-- Use `signer` for admin-only access control
-- Work with `vector` and `string` modules
-- Mutate global state using `borrow_global_mut`
-- Write and run tests using `#[test]` and `aptos move test`
+- ✅ Resource definition with `has key`
+- ✅ Conditional creation or update
+- 🔍 Read functions (views)
+- 🧪 Unit test with debug prints
 
 ---
 
 ## 🧱 Structs
 
 ```move
-struct Settings has key {
-    admin: address,
-    spill: String,
-    users: vector<User>
-}
-
-struct User has store, drop {
+struct Account has key {
     first_name: String,
-    last_name: String,
+    last_name: String
 }
 ```
 
-- Settings stores the admin address, a text message (spill), and a list of Users.
-- User holds individual names.
-
-## ⚠️ Error Codes
-
-`const E_SIGNER_NOT_ADMIN: u64 = 1;`
-
-Used to restrict non-admin actions:
+- `Account` is stored under a user’s address and holds basic profile information.
+- This resource allows `personal data binding` directly to user accounts.
 
 ## 🚀 Entry Functions
 
-`set_spill(admin: &signer, spill: String)`
+`set_account(user_signer: &signer, first_name: String, last_name: String)`
 
-Sets a new spill message (admin-only).
+Creates or updates the Account resource at the caller's address:
 
-`push_user(admin: &signer, first_name: String, last_name: String)`
+- If the resource `exists`, it mutates the fields.
+- If it `doesn't exist`, it initializes and stores it using `move_to`.
 
-Adds a new user to the list.
+## 🔍 View Functions
 
-`pop_user(admin: &signer)`
+```move
+get_first_name(user_addr: address): String
+get_last_name(user_addr: address): String
 
-Removes the last user if the list is not empty.
+```
 
-`set_admin(admin: &signer, new_admin: address)`
-
-Transfers admin privileges to a new address.
+- These `#[view]` functions allow read-only access to the `Account` data.
+- They do not require a signer and are safe to use from frontend UIs or explorers.
 
 ## 🧪 Testing the Module
-
-`Use` the #[test] attribute and a hardcoded deployer address.`
 
 To run all tests:
 `aptos move test`
@@ -67,20 +54,25 @@ To run all tests:
 ## 💡 Example Usage
 
 ```move
-push_user(&admin_signer, string::utf8(b"Alice"), string::utf8(b"Smith"));
-pop_user(&admin_signer);
-set_spill(&admin_signer, string::utf8(b"Updated!"));
+set_account(&signer, string::utf8(b"Renzo"), string::utf8(b"Cabarios"));
+let fname = get_first_name(@0x123);
+let lname = get_last_name(@0x123);
 ```
 
 ## 📚 Summary
 
-**Structs**: `Settings`, `User`
+**Structs**: `Account`
 
-**Concepts**: signer-based access control, mutation with `borrow_global_mut`, error handling with assert!
+**Concepts**:
 
-**Data Types Used**: `address`, `String`, `vector<T>`
+- Resource-based user data
+- Conditional creation using `exists`
+- Mutation using `borrow_global_mut`
+- Read-only access via view functions
 
-**Testing**: Inline unit tests using `#[test]`
+**Data Types Used**: `address`, `String`
+
+**Testing**: Inline `#[test]` with debug printing
 
 ## 📖 Recommended Reading
 
@@ -93,3 +85,5 @@ set_spill(&admin_signer, string::utf8(b"Updated!"));
 - [References & Mutation](https://aptos.dev/en/build/smart-contracts/book/references)
 
 - [Testing in Move](https://aptos.dev/en/build/move/move-cli/testing/)
+
+- [Strings in Move](https://aptos.dev/en/build/smart-contracts/book/string/)
