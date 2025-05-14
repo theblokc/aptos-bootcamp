@@ -85,7 +85,11 @@ set_spill(&admin_signer, string::utf8(b"Updated!"));
 ## 📖 Recommended Reading
 
 - [Structs & Abilities](https://aptos.dev/en/build/smart-contracts/book/resources#abilities)
+
 - [Signer & Access Control](https://aptos.dev/en/build/smart-contracts/book/signer/)
+
 - [Vector Module](https://aptos.dev/en/build/smart-contracts/book/vector#operations)
+
 - [References & Mutation](https://aptos.dev/en/build/smart-contracts/book/references)
+
 - [Testing in Move](https://aptos.dev/en/build/move/move-cli/testing/)
